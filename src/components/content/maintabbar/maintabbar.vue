@@ -1,38 +1,38 @@
 <template>
     <tabbar>
-        <tabbar-item path="/home" activeColor="red">
+        <tabbar-item path="/home" :activeColor="activeColor">
             <template #itemIcon>
-                <img src="~assets/images/logo/logo.png">
+                <img src="~assets/images/home.png">
             </template>
             <template #itemIconActive>
-                <img src="~assets/images/logo/logo-active.png">
+                <img src="~assets/images/home-active.png">
             </template>
             <template #itemName>首页</template>
         </tabbar-item>
-        <tabbar-item path="/notice" activeColor="red">
+        <tabbar-item path="/category" :activeColor="activeColor">
             <template #itemIcon>
-                <img src="~assets/images/logo/logo.png">
+                <img src="~assets/images/category.png">
             </template>
             <template #itemIconActive>
-                <img src="~assets/images/logo/logo-active.png">
-            </template>
-            <template #itemName>公告</template>
-        </tabbar-item>
-        <tabbar-item path="/category" activeColor="red">
-            <template #itemIcon>
-                <img src="~assets/images/logo/logo.png">
-            </template>
-            <template #itemIconActive>
-                <img src="~assets/images/logo/logo-active.png">
+                <img src="~assets/images/category-active.png">
             </template>
             <template #itemName>分类</template>
         </tabbar-item>
-        <tabbar-item path="/profile" activeColor="red">
+        <tabbar-item path="/cart" :activeColor="activeColor">
             <template #itemIcon>
-                <img src="~assets/images/logo/logo.png">
+                <img src="~assets/images/cart.png">
             </template>
             <template #itemIconActive>
-                <img src="~assets/images/logo/logo-active.png">
+                <img src="~assets/images/cart-active.png">
+            </template>
+            <template #itemName>购物车</template>
+        </tabbar-item>
+        <tabbar-item path="/profile" :activeColor="activeColor">
+            <template #itemIcon>
+                <img src="~assets/images/user.png">
+            </template>
+            <template #itemIconActive>
+                <img src="~assets/images/user-active.png">
             </template>
             <template #itemName>个人</template>
         </tabbar-item>
@@ -51,7 +51,7 @@
         name: 'mainTabbar',
         data() {
             return {
-
+                activeColor: '#f08600'
             };
         },
         computed: {},

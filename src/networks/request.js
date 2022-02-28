@@ -2,7 +2,8 @@ import axios from "axios";
 
 export default function request(config) {
     const instance = axios.create({
-        baseURL: 'http://biboniu.top'
+        // baseURL: 'http://biboniu.top'
+        baseURL: 'http://152.136.185.210:7878/api/hy66'
     })
     
     // 请求拦截

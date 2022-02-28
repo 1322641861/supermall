@@ -2,10 +2,10 @@
     <div class="tabbar-item" @click="showActive">
         <div>
             <div v-if='showActived'>
-                <slot name="itemIcon"></slot>
+               <slot name="itemIconActive"></slot>
             </div>
             <div v-else>
-               <slot name="itemIconActive"></slot> 
+                <slot name="itemIcon"></slot>
             </div>
             <div :style="activeStyle" :class="{active: active}">
                <slot name="itemName"></slot> 
@@ -38,7 +38,7 @@ export default {
             return this.active
         },
         activeStyle() {
-            console.log(this.activeColor);
+            // console.log(this.activeColor);
             return this.active ? {color: this.activeColor} : {}
         }
     },
