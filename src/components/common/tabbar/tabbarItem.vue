@@ -66,6 +66,11 @@ export default {
         text-align: center;
         flex: 1;
         height: 49px;
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
     }
     .tabbar-item img{
         width: 20px;
