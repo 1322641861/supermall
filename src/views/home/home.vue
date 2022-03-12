@@ -4,21 +4,32 @@
         <navbar>
             <div slot="center">supermall</div>
         </navbar>
-        <swiper :banners="banners"/>
-        <Recommend :recommend="recommend"></Recommend>
-        <Features></Features>
-        <tabbar-view class="tabbar-view"
-            :tabbarList="['流行', '新款', '精选']"
-            @tabClick="tabClick">
-        </tabbar-view>
-        <goods-card :goodsList="showGoods"></goods-card>
+        <Scroll :probeType="3" 
+            :pullUpLoad="true" 
+            :showGoods="showGoods"
+            @scroll="emitScroll"
+            @pullingUp="pullingUp"
+            ref="scroll">
+            <swiper :banners="banners"/>
+            <Recommend :recommend="recommend"></Recommend>
+            <Features></Features>
+            <tabbar-view class="tabbar-view"
+                :tabbarList="['流行', '新款', '精选']"
+                @tabClick="tabClick">
+            </tabbar-view>
+            <goods-card :goodsList="showGoods"></goods-card>
+        </Scroll>
+        <scroll-top :isShow="isShow" @click.native="toTop"></scroll-top>
     </div>
 </template> 
 
 <script>
 import navbar from 'components/common/navbar/navbar'
+import Scroll from 'components/common/scroll/Scroll'
+
 import tabbarView from 'components/content/homeTab/homeTabView'
 import goodsCard from 'components/content/goodsCard/goodsCard'
+import scrollTop from 'components/content/scroll/scrollTop'
 
 import swiper from './homeComponents/homeSwiper'
 import Recommend from './homeComponents/homeRecommend'
@@ -26,10 +37,11 @@ import Features from './homeComponents/featuresView'
 
 import { getHomeMultidata, getHomeGoods } from '@/networks/home'
 
-
 export default {
     components: {
         navbar,
+        Scroll,
+        scrollTop,
         tabbarView,
         goodsCard,
         swiper,
@@ -47,6 +59,7 @@ export default {
                 'sell': {  page: 1, list: [] },
             },
             currentType: 'pop',
+            isShow: false,
         };
     },
     computed: {
@@ -73,8 +86,6 @@ export default {
             }
         },
 
-
-
         /*
          网络请求
         */
@@ -90,12 +101,26 @@ export default {
         },
         getHomeGoods(type) {
             getHomeGoods(type, this.goods[type].page).then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res && res.data) {
                    this.goods[type].list.push(...res.data.list)
                    this.goods[type].page++
+                   this.$refs.scroll.finishPullUp()
                 }
             })
+        },
+
+        // scrollTop组件显示隐藏
+        emitScroll(position) {
+            this.isShow = (position && position.y <= -800) ? true : false;
+        },
+        // 调用scroll组件回到顶部
+        toTop() {
+            this.$refs.scroll.scrollTo(0, 0)
+        },
+        pullingUp() {
+            console.log('pullingUp')
+            this.getHomeGoods(this.currentType)
         }
     },
     created() {
@@ -105,7 +130,8 @@ export default {
         this.getHomeGoods('new') 
         this.getHomeGoods('sell')
     },
-    mounted() {},
+    mounted() {
+    },
     beforeCreate() {},
     beforeMount() {},
     beforeUpdate() {},
@@ -120,9 +146,13 @@ export default {
         padding-bottom: 50px;
         padding-top: 44px;
         background-color: #f5f5f5;
+        /* position: relative;
+        height: 100vh; */
     }
     .tabbar-view {
         position: sticky;
         top: 44px;
+        /* top: 0; */
+        z-index: 1;
     }
 </style>
