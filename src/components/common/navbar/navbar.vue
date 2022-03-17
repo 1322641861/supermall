@@ -2,7 +2,7 @@
     <div class="nav-bar" :style="{backgroundColor: backgroundColor}">
         <div class="left"><slot name="left"></slot></div>
         <div class="center"><slot name="center"></slot></div>
-        <div class="right"><slot name="left"></slot></div>
+        <div class="right"><slot name="right"></slot></div>
     </div>
 </template>
 
@@ -51,6 +51,10 @@ export default {
     }
     .left, .right {
         width: 60px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .center {
         flex: 1;

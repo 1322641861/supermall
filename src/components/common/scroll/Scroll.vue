@@ -35,11 +35,9 @@
       }
     },
     mounted() {
-      setTimeout(() => {
-        this.$nextTick(() => {
-          this.scrollInit()
-        })
-      }, 1000)
+      this.$nextTick(() => {
+        this.scrollInit()
+      })
     },
     methods: {
       scrollInit() {

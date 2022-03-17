@@ -1,6 +1,7 @@
 <template>
     <div class="card-item">
-        <a href="cardData.link">
+        <!-- <a href="cardData.link" @click="foodsDetail"> -->
+        <a @click="foodsDetail">
             <div class="card-img">
                 <img :src="cardData.show.img" alt="">
             </div>
@@ -10,8 +11,7 @@
             <div class="card-features">
                 <span class="card-price"><span>￥</span>{{cardData.price}}</span>
                 <span class="card-collect">
-                    <img src="~assets/images/common/collect.png" alt="">
-                    <!-- <img src="" alt=""> -->
+                    <img src="~assets/images/common/collect.png" alt="" @load="imgUpdate">
                     <span>{{cardData.cfav}}</span>
                 </span>
             </div>
@@ -39,7 +39,15 @@ export default {
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+        imgUpdate() {
+            this.$bus.$emit('imgUpdated')
+        },
+        foodsDetail() {
+            console.log('hhh');
+            this.$router.push('/detail/' + this.cardData.iid)
+        }
+    },
     created() {},
     mounted() {},
     beforeCreate() {},

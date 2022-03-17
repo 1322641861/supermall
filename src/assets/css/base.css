@@ -11,6 +11,10 @@
     --color-theme: #f08600;
 }
 
+* {
+    touch-action: none;
+}
+
 ul, li, p {
     margin: 0;
     padding: 0;
