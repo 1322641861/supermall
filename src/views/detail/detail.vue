@@ -2,25 +2,33 @@
     <div class="detail">
         <detail-nav></detail-nav>
         <detail-swiper :imageList="imageList"></detail-swiper>
+        <detail-title :goods="goods"></detail-title>
+        <shop-info :shopInfo="shopInfo"></shop-info>
     </div>
 </template>
 
 <script>
 import detailNav from "./detailComps/detailNav"
 import detailSwiper from "./detailComps/detailSwiper"
-import { getDetail } from "@/networks/detail"
+import detailTitle from "./detailComps/detailTitle"
+import shopInfo from "./detailComps/shopInfo"
+
+import { getDetail, Goods, ShopInfo } from "@/networks/detail"
 
 export default {
     components: {
         detailNav,
-        detailSwiper
+        detailSwiper,
+        detailTitle,
+        shopInfo
     },
     name: 'detail',
     data() {
         return {
             iid: null,
-            itemInfo: {},
-            imageList: []
+            imageList: [],
+            shopInfo: {},
+            goods: {}
         };
     },
     computed: {},
@@ -28,10 +36,17 @@ export default {
     methods: {
         getDetail() {
             getDetail(this.iid).then((res) => {
-                console.log(res);
                 if (res && res.result) {
-                    this.itemInfo = res.result.itemInfo
-                    this.imageList = this.itemInfo?.topImages ?? []
+                    /// 轮播图
+                    this.imageList = res.result.itemInfo?.topImages ?? []
+                    /// 获取店铺信息
+                    this.shopInfo = new ShopInfo(res.result.shopInfo)
+                    this.goods = new Goods(
+                        res.result.itemInfo,
+                        res.result.columns,
+                        this.shopInfo.services
+                    )
+                    console.log(this.shopInfo, res.result, this.goods);
                 }
             })
         }

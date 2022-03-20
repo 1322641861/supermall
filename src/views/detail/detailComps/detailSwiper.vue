@@ -1,11 +1,12 @@
 <template>
-    <div class="detail-swiper">
-        <Swiper>
-            <Swiper-item v-for="(item, key) in imageList" :key="key">
-                <img :src="item" alt="">
-            </Swiper-item>
-        </Swiper>
-    </div>
+    <Swiper class="detail-swiper">
+        <Swiper-item v-for="(item, key) in imageList" :key="key">
+            <div class="detail-img">
+                <img class="detail-swiper-item" :src="item">
+                <!-- <div class="detail-swiper-item" :style="bgImg(item)"></div> -->
+            </div> 
+        </Swiper-item>
+    </Swiper>
 </template>
 
 <script>
@@ -19,7 +20,9 @@ export default {
     props: {
         imageList: {
             type: Array,
-            default: []
+            default() {
+                return []
+            }
         }
     },
     data() {
@@ -27,11 +30,16 @@ export default {
 
         };
     },
-    computed: {},
+    computed: {
+        
+    },
     watch: {},
-    methods: {},
+    methods: {
+        bgImg(url) {
+            return {background: `url(${url}) 0 center/cover`} 
+        }
+    },
     created() {
-        console.log(this.imageList);
     },
     mounted() {},
     beforeCreate() {},
@@ -44,4 +52,12 @@ export default {
 }
 </script>
 <style scoped>
+    .detail-img {
+        height: 100vw;
+        background: #f7f7f7;
+        margin-top: 44px;
+    }
+    /* .detail-img .detail-swiper-item {
+        height: 100%;
+    } */
 </style>

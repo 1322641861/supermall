@@ -44,7 +44,6 @@ export default {
             this.$bus.$emit('imgUpdated')
         },
         foodsDetail() {
-            console.log('hhh');
             this.$router.push('/detail/' + this.cardData.iid)
         }
     },
