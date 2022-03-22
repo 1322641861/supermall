@@ -16,16 +16,28 @@ const routes = [
         redirect: '/home'
     }, {
         path: '/home',
-        component: home
+        component: home,
+        meta: {
+            show: true, // tabbar显示隐藏
+        }
     }, {
         path: '/cart',
         component: cart,
+        meta: {
+            show: true,
+        }
     }, {
         path: '/category',
         component: category,
+        meta: {
+            show: true,
+        }
     }, {
         path: '/profile',
         component: profile,
+        meta: {
+            show: true,
+        }
     }, {
         path: '/detail/:iid',
         component: detail,

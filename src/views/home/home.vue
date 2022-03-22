@@ -7,7 +7,7 @@
         <tabbar-view class="tabbar-view2" :tabbarList="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"
             v-show="tabFixed">
         </tabbar-view>
-        <Scroll :probeType="3" :pullUpLoad="true" :showGoods="showGoods" @scroll="emitScroll" @pullingUp="pullingUp"
+        <Scroll :probeType="3" :pullUpLoad="true" :showGoods="showGoods" @ ="emitScroll" @pullingUp="pullingUp"
             ref="scroll">
             <swiper :banners="banners" @imageLoad="imageLoad" />
             <Recommend :recommend="recommend"></Recommend>
@@ -173,10 +173,7 @@
 <style scoped>
     .home {
         padding-bottom: 50px;
-        padding-top: 44px;
         background-color: #f5f5f5;
-        /* position: relative;
-        height: 100vh; */
     }
 
     .tabbar-view2 {

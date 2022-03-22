@@ -65,10 +65,11 @@
         z-index: 3;
         right: 25px;
         bottom: 55px;
-        background: #fff;
+        background: rgba(255,255,255,.8);
         border-radius: 50%;
         transition: .3s;
         opacity: 0;
+        border: 1px solid #eee;
     }
 
     .to-top {

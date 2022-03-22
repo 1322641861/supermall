@@ -1,14 +1,23 @@
 <template>
     <div class="detail-title">
-        <p>{{goods.title}}</p>
-        <div class="title-des">
-            <span v-show="goods.lowNowPrice">￥{{goods.lowNowPrice}}</span>
-            <span v-show="goods.lowPrice">￥{{goods.lowPrice}}</span>
-            <span v-show="goods.discountDesc" class="flag" :style="{backgroundColor: goods.discountBgColor}">{{goods.discountDesc}}</span>
+        <div class="detail-title-wrap">
+            <p>{{goods.title}}</p>
+            <div class="title-des">
+                <span v-show="goods.lowNowPrice">￥{{goods.lowNowPrice}}</span>
+                <span v-show="goods.lowPrice">￥{{goods.lowPrice}}</span>
+                <span v-show="goods.discountDesc" class="flag" :style="{backgroundColor: goods.discountBgColor}">{{goods.discountDesc}}</span>
+            </div>
+            <div class="columns">
+                <span v-for="item in goods.columns">{{item}}</span>
+            </div>
+            <div class="services">
+                <div v-for="service in goods.services">
+                    <img :src="service.icon" alt="">
+                    <span>{{service.name}}</span>
+                </div>
+            </div>
         </div>
-        <div class="columns">
-            <span v-for="item in goods.columns">{{item}}</span>
-        </div>
+        <div class="divide"></div>
     </div>
 </template>
 
@@ -47,10 +56,11 @@ export default {
 }
 </script>
 <style scoped>
-    .detail-title {
-        margin: 10px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
+    .detail-title-wrap {
+        margin: 10px 10px 0;
+    }
+    .detail-title .divide {
+        margin-bottom: 15px;
     }
     .detail-title p {
         font-size: 19px;
@@ -59,10 +69,12 @@ export default {
     }
     .detail-title .columns {
         color: var(--color-text);
-        font-size: 14px;
+        font-size: 13px;
         display: flex;
         justify-content: space-between;
         margin-top: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #eee;
     }
     .title-des span:nth-of-type(1) {
         color: var(--color-higt-text);
@@ -80,5 +92,22 @@ export default {
         font-size: 12px;
         border-radius: 9px;
         vertical-align: text-top;
+    }
+
+    .services {
+        font-size: 13px;
+        padding: 14px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        line-height: 18px;
+    }
+    .services img {
+        width: 13px;
+        height: 13px;
+        margin-right: 3px;
+    }
+    .services span {
+        vertical-align: top;
     }
 </style>

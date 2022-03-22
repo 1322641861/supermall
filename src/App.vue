@@ -3,7 +3,7 @@
     <keep-alive exclude="detail">
       <router-view></router-view>
     </keep-alive>
-    <main-tabbar></main-tabbar>
+    <main-tabbar v-show="$route.meta.show"></main-tabbar>
   </div>
 </template>
 

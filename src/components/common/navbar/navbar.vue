@@ -43,7 +43,8 @@ export default {
         height: 44px;
         background-color: var(--color-theme);
         box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-        position: fixed;
+        /* position: fixed; */
+        position: relative;
         z-index: 1;
         left: 0;
         top: 0;

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper">
+  <div class="wrapper" ref="wrapper" :style="getHeight">
     <!-- wrapper里面只能有一个dom, bscroll才会生效 -->
     <div class="content">
       <slot></slot>
@@ -26,12 +26,21 @@
         default() {
           return []
         }
+      },
+      redundantHeight: {
+        type: Number,
+        default: 94
       }
     },
     data() {
       return {
         scroll: null,
         message: '哈哈哈'
+      }
+    },
+    computed: {
+      getHeight() {
+        return {height: `calc(100vh - ${this.redundantHeight}px)`};
       }
     },
     mounted() {
@@ -97,7 +106,7 @@
     right: 0;
     top: 44px;
     bottom: 50px; */
-    height: calc(100vh - 94px);
+    /* height: calc(100vh - 94px); */
     /* margin-top: 44px; */
   }
 </style>

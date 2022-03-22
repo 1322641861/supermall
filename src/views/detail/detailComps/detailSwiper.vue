@@ -55,7 +55,6 @@ export default {
     .detail-img {
         height: 100vw;
         background: #f7f7f7;
-        margin-top: 44px;
     }
     /* .detail-img .detail-swiper-item {
         height: 100%;

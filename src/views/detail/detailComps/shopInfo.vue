@@ -85,7 +85,7 @@ export default {
 </script>
 <style scoped>
     .shop-info {
-        padding: 6px 0 20px;
+        padding: 6px 0 24px;
         border-bottom: 1px solid #EEE;
         margin: 0 10px;
     }
