@@ -1,3 +1,6 @@
+const moment = require("moment")
+moment.locale('zh-cn')
+
 module.exports = {
     debounce(fn, delay = 100) {
         let timer;
@@ -13,5 +16,8 @@ module.exports = {
             clearTimeout(timer)
         }
         return handleFn
+    },
+    fromNow(createdTime) { // n years ago
+        return moment(createdTime).fromNow()
     }
 }

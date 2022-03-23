@@ -7,7 +7,7 @@
         <tabbar-view class="tabbar-view2" :tabbarList="['流行', '新款', '精选']" @tabClick="tabClick" ref="tabControl2"
             v-show="tabFixed">
         </tabbar-view>
-        <Scroll :probeType="3" :pullUpLoad="true" :showGoods="showGoods" @ ="emitScroll" @pullingUp="pullingUp"
+        <Scroll :probeType="3" :pullUpLoad="true" :showGoods="showGoods" @scroll ="emitScroll" @pullingUp="pullingUp"
             ref="scroll">
             <swiper :banners="banners" @imageLoad="imageLoad" />
             <Recommend :recommend="recommend"></Recommend>
@@ -33,7 +33,7 @@
     import Features from './homeComponents/featuresView'
 
     import { getHomeMultidata, getHomeGoods } from '@/networks/home'
-    import { debounce } from 'common/utils'
+    import {itemListenerMixin} from 'common/mixin'
 
     export default {
         components: {
@@ -60,7 +60,7 @@
                 isShow: false, // 回到顶部
                 tabFixed: false,
                 tabOffset: 0,
-                saveY: 0
+                saveY: 0,
             };
         },
         computed: {
@@ -68,6 +68,7 @@
                 return this.goods[this.currentType].list
             },
         },
+        mixins: [itemListenerMixin], // $bus 全局监听混和(抽取公共函数和变量)
         watch: {},
         methods: {
             /*
@@ -150,8 +151,6 @@
 
         },
         mounted() {
-            // 监听图片是否已加载完
-            this.$bus.$on('imgUpdated', debounce(this.$refs.scroll.refresh))
         },
         beforeCreate() { },
         beforeMount() { },
@@ -167,6 +166,7 @@
         },
         deactivated() {
             this.saveY = this.$refs.scroll.getScrollY()
+            this.$bus.$off('imgUpdated', this.itemImgLoad)
         }
     }
 </script>

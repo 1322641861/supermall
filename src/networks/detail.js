@@ -9,6 +9,12 @@ export function getDetail(iid) {
     })
 }
 
+export function getRecommend(iid) {
+    return request({
+        url: '/recommend',
+    })
+}
+
 export class Goods {
     constructor(itemInfo, columns, services) {
         this.title = itemInfo.title
@@ -33,5 +39,17 @@ export class ShopInfo {
         this.cFans = shopInfo.cFans
         this.shopUrl = shopInfo.shopUrl
         this.services = shopInfo.services
+    }
+}
+
+export class Recommend {
+    constructor(recommend) {
+        this.show = {
+            img: recommend.image
+        },
+        this.title = recommend.title,
+        this.price = recommend.price,
+        this.cfav = recommend.cfav,
+        this.iid = recommend.item_id
     }
 }

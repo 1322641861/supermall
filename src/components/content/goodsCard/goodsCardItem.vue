@@ -41,7 +41,15 @@ export default {
     watch: {},
     methods: {
         imgUpdate() {
+            /// 1.采用销毁
             this.$bus.$emit('imgUpdated')
+            
+            /// 2.采用路由监听
+            // if (this.$route.path.indexOf('/home') > -1) {
+            //     this.$bus.$emit('homeImgUpdated')
+            // } else if (this.$route.path.indexOf('/detail') > -1) {
+            //     this.$bus.$emit('detailImgUpdated')
+            // }
         },
         foodsDetail() {
             this.$router.push('/detail/' + this.cardData.iid)
