@@ -27,7 +27,7 @@
           return []
         }
       },
-      redundantHeight: {
+      redundantHeight: { // scroll高度(除去tab高度)
         type: Number,
         default: 94
       }

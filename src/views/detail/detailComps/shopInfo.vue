@@ -52,7 +52,11 @@ export default {
         };
     },
     computed: {},
-    watch: {},
+    watch: {
+        shopInfo() {
+            this.score = this.shopInfo.score
+        }
+    },
     methods: {
         goShop() {
             window.location.href = this.shopInfo.shopUrl
@@ -72,8 +76,7 @@ export default {
     },
     beforeMount() {
     },
-    beforeUpdate() { // views 视图更新触发
-        this.score = this.shopInfo.score
+    beforeUpdate() {
     },
     updated() {
     },

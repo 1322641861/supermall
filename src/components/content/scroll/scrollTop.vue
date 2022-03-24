@@ -64,7 +64,7 @@
         position: absolute;
         z-index: 3;
         right: 25px;
-        bottom: 55px;
+        bottom: 95px;
         background: rgba(255,255,255,.8);
         border-radius: 50%;
         transition: .3s;

@@ -1,18 +1,19 @@
 <template>
     <div class="detail">
-        <detail-nav></detail-nav>
-        <Scroll :redundantHeight="44" :probeType="3" @scroll="emitScroll" ref="scroll">
+        <detail-nav ref="nav" @emitTabClick="emitTabClick"></detail-nav>
+        <Scroll :probeType="3" @scroll="emitScroll" ref="scroll">
             <div v-show="!notData">
                 <detail-swiper :imageList="imageList"></detail-swiper>
                 <detail-title :goods="goods"></detail-title>
                 <shop-info :shopInfo="shopInfo"></shop-info>
                 <div class="divide"></div>
                 <detail-goods-info :detailInfo="detailInfo" @goodsInfoLoad="goodsInfoLoad"></detail-goods-info>
-                <detail-params :itemParams="itemParams" @infoImgLoad="infoImgLoad"></detail-params>
-                <detail-comment :rate="rate"></detail-comment>
+                <detail-params ref="params" :itemParams="itemParams" @infoImgLoad="infoImgLoad"></detail-params>
+                <detail-comment ref="comment" :rate="rate"></detail-comment>
             </div>
-            <detail-recommend :recommend="recommend"></detail-recommend>
+            <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
         </Scroll>
+        <operation-bar></operation-bar>
         <scroll-top :isShow="isShowBtn" @click.native="toTop"></scroll-top>
     </div>
 </template>
@@ -26,11 +27,13 @@
     import detailParams from "./detailComps/detailParams"
     import detailComment from "./detailComps/detailComment"
     import detailRecommend from "./detailComps/detailRecommend"
+    import operationBar from "./detailComps/operationBar"
 
     import Scroll from "components/common/scroll/Scroll"
     import scrollTop from "components/content/scroll/scrollTop"
     import { getDetail, Goods, ShopInfo, getRecommend, Recommend } from "@/networks/detail"
     import {itemListenerMixin} from "common/mixin"
+    import {debounce} from "common/utils"
 
     export default {
         components: {
@@ -42,6 +45,7 @@
             detailParams,
             detailComment,
             detailRecommend,
+            operationBar,
             Scroll,
             scrollTop
         },
@@ -59,6 +63,8 @@
                 rate: {}, // 评论
                 recommend: [],
                 notData: false,
+                tabClickYs: [], // 顶部导航栏对应位置高度
+                tabClickYsLoad: null
             };
         },
         computed: {},
@@ -98,9 +104,21 @@
             /// detailGoodsInfo
             goodsInfoLoad() {
                 this.$refs.scroll.refresh()
+
+                this.tabClickYsLoad()
             },
             emitScroll(p) {
                 this.isShowBtn = p.y < -800 ? true : false;
+
+                if (this.tabClickYs[1] < p.y && p.y <= this.tabClickYs[0]) {
+                    this.$refs.nav.currentIndex = 0
+                } else if (this.tabClickYs[2] < p.y && p.y <= this.tabClickYs[1]) {
+                    this.$refs.nav.currentIndex = 1
+                } else if (this.tabClickYs[3] < p.y && p.y <= this.tabClickYs[2]) {
+                    this.$refs.nav.currentIndex = 2
+                } else if (p.y <= this.tabClickYs[3]) {
+                    this.$refs.nav.currentIndex = 3
+                }
             },
             toTop() {
                 this.$refs.scroll.scrollTo(0, 0)
@@ -109,13 +127,26 @@
             infoImgLoad() {
                 /// 监听推荐图片, 这里可以不监听, 节省性能
                 // this.$refs.scroll.refresh()
-            }
+            },
+            emitTabClick(index) {
+                this.$refs.scroll.scrollTo(0, this.tabClickYs[index], 300)
+            },
         },
         created() {
             this.iid = this.$route.params.iid
 
             this.getDetail()
             this.getRecommend()
+
+            /// 给监听位置增加防抖
+            this.tabClickYsLoad = debounce(() => {
+                this.tabClickYs = [
+                    0,
+                    -this.$refs.params.$el.offsetTop,
+                    -this.$refs.comment.$el.offsetTop,
+                    -this.$refs.recommend.$el.offsetTop
+                ]
+            }, 1000)
         },
         mounted() {
         },

@@ -44,7 +44,7 @@ export default {
     methods: {
         goodsInfoLoad() {
             ++this.counter
-            if (this.counter % 6 === 0 || this.counter === this.imageLength) this.$emit('goodsInfoLoad')
+            if (this.counter % 7 === 0 || this.counter === this.imageLength) this.$emit('goodsInfoLoad')
         }
     },
     created() {

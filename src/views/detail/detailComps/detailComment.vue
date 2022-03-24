@@ -28,7 +28,7 @@
             </div>
             <div class="comment-img">
                 <div v-for="img in list.images">
-                    <img :src="img" alt="" srcset="">
+                    <img :class="onlyImgClass(list.images.length)" :src="img" alt="" srcset="">
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@ export default {
         getCommentLen() {
             const len = this.rate.cRate ? this.rate.cRate : 0
             return len >= 10000 ? `${len / 10000}万+` : len
-        }
+        },
     },
     watch: {},
     methods: {
@@ -68,6 +68,9 @@ export default {
                 const oldTime = createdTime * 1000;
                 return fromNow(oldTime);
             }
+        },
+        onlyImgClass(imagesLen) {
+            return {'only': imagesLen === 1}
         }
     },
     created() {},
@@ -161,6 +164,9 @@ export default {
     }
     .comment-img div:nth-of-type(4n) img {
         border-radius: 0 6px 6px 0;
+    }
+    .comment-img div img.only {
+        border-radius: 6px;
     }
     .comment-style {
         color: var(--color-text);
