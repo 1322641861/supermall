@@ -26,7 +26,6 @@
 
     import tabbarView from 'components/content/homeTab/homeTabView'
     import goodsCard from 'components/content/goodsCard/goodsCard'
-    import scrollTop from 'components/content/scroll/scrollTop'
 
     import swiper from './homeComponents/homeSwiper'
     import Recommend from './homeComponents/homeRecommend'
@@ -39,7 +38,6 @@
         components: {
             navbar,
             Scroll,
-            scrollTop,
             tabbarView,
             goodsCard,
             swiper,
@@ -128,10 +126,6 @@
                 // console.log(position);
                 this.isShow = (position && position.y <= -800) ? true : false;
                 this.tabFixed = this.tabOffset < Math.abs(position.y) + 44
-            },
-            // 调用scroll组件回到顶部
-            toTop() {
-                this.$refs.scroll.scrollTo(0, 0)
             },
             pullingUp() {
                 this.getHomeGoods(this.currentType)

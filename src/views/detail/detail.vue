@@ -30,7 +30,6 @@
     import operationBar from "./detailComps/operationBar"
 
     import Scroll from "components/common/scroll/Scroll"
-    import scrollTop from "components/content/scroll/scrollTop"
     import { getDetail, Goods, ShopInfo, getRecommend, Recommend } from "@/networks/detail"
     import {itemListenerMixin} from "common/mixin"
     import {debounce} from "common/utils"
@@ -47,7 +46,6 @@
             detailRecommend,
             operationBar,
             Scroll,
-            scrollTop
         },
         name: 'detail',
         mixins: [itemListenerMixin],
@@ -64,7 +62,8 @@
                 recommend: [],
                 notData: false,
                 tabClickYs: [], // 顶部导航栏对应位置高度
-                tabClickYsLoad: null
+                tabClickYsLoad: null,
+                currentIndex: 0
             };
         },
         computed: {},
@@ -110,18 +109,16 @@
             emitScroll(p) {
                 this.isShowBtn = p.y < -800 ? true : false;
 
-                if (this.tabClickYs[1] < p.y && p.y <= this.tabClickYs[0]) {
-                    this.$refs.nav.currentIndex = 0
-                } else if (this.tabClickYs[2] < p.y && p.y <= this.tabClickYs[1]) {
-                    this.$refs.nav.currentIndex = 1
-                } else if (this.tabClickYs[3] < p.y && p.y <= this.tabClickYs[2]) {
-                    this.$refs.nav.currentIndex = 2
-                } else if (p.y <= this.tabClickYs[3]) {
-                    this.$refs.nav.currentIndex = 3
-                }
-            },
-            toTop() {
-                this.$refs.scroll.scrollTo(0, 0)
+                /// 导航位置联动
+                this.tabClickYs.forEach((item, index) => {
+                    if (this.currentIndex !== index
+                        && (this.tabClickYs.length === index + 1 && item >= p.y 
+                        || this.tabClickYs[index+1] < p.y && p.y <= item)
+                    ) {
+                        this.currentIndex = index
+                        this.$refs.nav.currentIndex = index
+                    }
+                });
             },
             /// detailParams
             infoImgLoad() {
