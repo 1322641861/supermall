@@ -4,7 +4,8 @@ import scrollTop from "components/content/scroll/scrollTop"
 export const itemListenerMixin = {
     data() {
         return {
-            itemImgLoad: null
+            itemImgLoad: null,
+            isShowBtn: false, 
         }
     },
     mounted() {
@@ -19,6 +20,9 @@ export const itemListenerMixin = {
         // 调用scroll组件回到顶部
         toTop() {
             this.$refs.scroll.scrollTo(0, 0)
+        },
+        listenShowScrollTop(sizeY) {
+            this.isShowBtn = sizeY < -800 ? true : false;      
         },
     },
 }

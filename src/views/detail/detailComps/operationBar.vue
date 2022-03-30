@@ -47,7 +47,7 @@ export default {
     watch: {},
     methods: {
         addToCart() {
-            console.log(222);
+            this.$emit('addToCart')
         },
         buy() {
             console.log(333);
@@ -109,7 +109,7 @@ export default {
         text-align: center;
     }
     .cart-buy .card {
-        background-image: linear-gradient(to right, #f3d877, #ff8d00);
+        background-image: linear-gradient(to right, #f5d45f, #ff8d00);
     }
     .cart-buy .buy {
         background-image: linear-gradient(to right, #f77505, red);

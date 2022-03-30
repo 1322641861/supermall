@@ -13,7 +13,7 @@
             </div>
             <detail-recommend ref="recommend" :recommend="recommend"></detail-recommend>
         </Scroll>
-        <operation-bar></operation-bar>
+        <operation-bar @addToCart="addToCart"></operation-bar>
         <scroll-top :isShow="isShowBtn" @click.native="toTop"></scroll-top>
     </div>
 </template>
@@ -56,7 +56,6 @@
                 shopInfo: {},
                 goods: {}, 
                 detailInfo: {}, // 穿着效果
-                isShowBtn: false, 
                 itemParams: {}, // 参数
                 rate: {}, // 评论
                 recommend: [],
@@ -100,14 +99,15 @@
                     }
                 })
             },
-            /// detailGoodsInfo
+            /// detailGoodsInfo组件
             goodsInfoLoad() {
                 this.$refs.scroll.refresh()
 
                 this.tabClickYsLoad()
             },
             emitScroll(p) {
-                this.isShowBtn = p.y < -800 ? true : false;
+                // mixin中监听是否展示scrollTop按钮
+                this.listenShowScrollTop(p.y)
 
                 /// 导航位置联动
                 this.tabClickYs.forEach((item, index) => {
@@ -128,6 +128,11 @@
             emitTabClick(index) {
                 this.$refs.scroll.scrollTo(0, this.tabClickYs[index], 300)
             },
+            /// operationBar
+            addToCart() {
+                const payload = Object.assign({iid: this.iid}, this.goods)
+                this.$store.dispatch('addCart', payload)
+            }
         },
         created() {
             this.iid = this.$route.params.iid
@@ -137,12 +142,13 @@
 
             /// 给监听位置增加防抖
             this.tabClickYsLoad = debounce(() => {
-                this.tabClickYs = [
-                    0,
-                    -this.$refs.params.$el.offsetTop,
-                    -this.$refs.comment.$el.offsetTop,
-                    -this.$refs.recommend.$el.offsetTop
-                ]
+                this.tabClickYs = this.$refs.params 
+                    ? [
+                        0,
+                        -this.$refs.params.$el.offsetTop,
+                        -this.$refs.comment.$el.offsetTop,
+                        -this.$refs.recommend.$el.offsetTop
+                    ] : [0, 0, 0, 0]
             }, 1000)
         },
         mounted() {

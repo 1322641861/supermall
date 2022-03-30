@@ -8,15 +8,13 @@
 </template>
 
 <script>
-import router from '@/router/index'
 import mainTabbar from 'components/content/maintabbar/maintabbar'
 
 export default {
   name: 'App',
   components: {
     mainTabbar
-  },
-  router
+  }
 }
 </script>
 

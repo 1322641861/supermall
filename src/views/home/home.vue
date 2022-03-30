@@ -16,7 +16,7 @@
             </tabbar-view>
             <goods-card :goodsList="showGoods"></goods-card>
         </Scroll>
-        <scroll-top :isShow="isShow" @click.native="toTop"></scroll-top>
+        <scroll-top :isShow="isShowBtn" @click.native="toTop"></scroll-top>
     </div>
 </template>
 
@@ -55,7 +55,7 @@
                     'sell': { page: 1, list: [] },
                 },
                 currentType: 'pop',
-                isShow: false, // 回到顶部
+                isShowBtn: false, // 回到顶部
                 tabFixed: false,
                 tabOffset: 0,
                 saveY: 0,
@@ -123,8 +123,9 @@
             */
             // scrollTop组件显示隐藏
             emitScroll(position) {
-                // console.log(position);
-                this.isShow = (position && position.y <= -800) ? true : false;
+                // mixin中监听是否展示scrollTop按钮
+                this.listenShowScrollTop(position.y)
+
                 this.tabFixed = this.tabOffset < Math.abs(position.y) + 44
             },
             pullingUp() {
