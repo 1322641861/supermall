@@ -132,6 +132,7 @@
             addToCart() {
                 const payload = Object.assign({iid: this.iid}, this.goods)
                 this.$store.dispatch('addCart', payload)
+                this.$msg('添加成功')
             }
         },
         created() {

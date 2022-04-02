@@ -143,7 +143,6 @@
             this.getHomeGoods('pop')
             this.getHomeGoods('new')
             this.getHomeGoods('sell')
-
         },
         mounted() {
         },
