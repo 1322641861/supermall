@@ -35,3 +35,7 @@ a {
     color: #333;
     /* display: inline-block; */
 }
+
+.deep-linear-color {
+    background-image: linear-gradient(to right, #f77505, red);
+}

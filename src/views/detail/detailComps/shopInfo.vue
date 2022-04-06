@@ -99,6 +99,7 @@ export default {
     }
     .shop-img img {
         width: 50px;
+        height: 50px;
         background: #eee;
         border: 1px solid #ccc;
         border-radius: 50%;

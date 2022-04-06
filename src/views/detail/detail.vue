@@ -62,14 +62,17 @@
                 notData: false,
                 tabClickYs: [], // 顶部导航栏对应位置高度
                 tabClickYsLoad: null,
-                currentIndex: 0
+                currentIndex: 0,
+                loading: false
             };
         },
         computed: {},
         watch: {},
         methods: {
             getDetail() {
+                this.loading = true;
                 getDetail(this.iid).then((res, req) => {
+                    this.loading = false;
                     if (res && res.result) {
                         const result = res.result
                         /// 轮播图
@@ -79,7 +82,8 @@
                         this.goods = new Goods(
                             result.itemInfo,
                             result.columns,
-                            this.shopInfo.services
+                            this.shopInfo.services,
+                            this.imageList
                         )
                         this.detailInfo = result.detailInfo
                         this.itemParams = result.itemParams
@@ -130,7 +134,11 @@
             },
             /// operationBar
             addToCart() {
-                const payload = Object.assign({iid: this.iid}, this.goods)
+                if (this.loading) return
+                const payload = Object.assign({
+                    iid: this.iid,
+                    checked: false
+                }, this.goods)
                 this.$store.dispatch('addCart', payload)
                 this.$msg('添加成功')
             }

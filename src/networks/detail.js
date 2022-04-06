@@ -16,16 +16,22 @@ export function getRecommend(iid) {
 }
 
 export class Goods {
-    constructor(itemInfo, columns, services) {
-        this.title = itemInfo.title
-        this.desc = itemInfo.desc
-        this.price = itemInfo.price,
-        this.lowPrice = itemInfo.lowPrice,
-        this.discountDesc = itemInfo.discountDesc
-        this.columns = columns ?? {},
-        this.services = services ?? {}
-        this.lowNowPrice = itemInfo.lowNowPrice
-        this.discountBgColor = itemInfo.discountBgColor
+    constructor(
+        itemInfo,
+        columns,
+        services,
+        imageList,
+    ) {
+        this.title = itemInfo.title;
+        this.desc = itemInfo.desc;
+        this.price = itemInfo.price;
+        this.lowPrice = itemInfo.lowPrice;
+        this.discountDesc = itemInfo.discountDesc;
+        this.columns = columns ?? {};
+        this.services = services ?? {};
+        this.lowNowPrice = itemInfo.lowNowPrice;
+        this.discountBgColor = itemInfo.discountBgColor;
+        this.image = imageList[0];
     }
 }
 
@@ -46,10 +52,10 @@ export class Recommend {
     constructor(recommend) {
         this.show = {
             img: recommend.image
-        },
-        this.title = recommend.title,
-        this.price = recommend.price,
-        this.cfav = recommend.cfav,
-        this.iid = recommend.item_id
+        };
+        this.title = recommend.title;
+        this.price = recommend.price;
+        this.cfav = recommend.cfav;
+        this.iid = recommend.item_id;
     }
 }
