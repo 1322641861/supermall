@@ -12,8 +12,6 @@ export default {
         cartList.checked = !cartList.checked
     },
     [CHECK_ALL](state, payload) {
-        state.cartList.forEach((item, index) => {
-            state.cartList[index].checked = payload ? false : true
-        });
-    }
+        state.cartList.forEach(item => item.checked = payload ? false : true);
+    },
  }

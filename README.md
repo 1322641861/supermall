@@ -25,3 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - vuex 3.1.0
 - axios 0.26.0
 - core-js 3.21.1
+- vue-lazyload 1.3.3

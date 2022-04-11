@@ -3,7 +3,8 @@
         <!-- <a href="cardData.link" @click="foodsDetail"> -->
         <a @click="foodsDetail">
             <div class="card-img">
-                <img :src="cardData.show.img" alt="">
+                <!-- <img :src="cardData.show.img" alt=""> -->
+                <img v-lazy="cardData.show.img" alt="">
             </div>
             <div class="card-text">
                 <p>{{cardData.title}}</p>

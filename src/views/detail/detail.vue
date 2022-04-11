@@ -139,8 +139,7 @@
                     iid: this.iid,
                     checked: false
                 }, this.goods)
-                this.$store.dispatch('addCart', payload)
-                this.$msg('添加成功')
+                this.$store.dispatch('addCart', payload).then(res => this.$msg('添加成功'))
             }
         },
         created() {

@@ -3,10 +3,10 @@
         <div class="check-wrap">
             <check-box :checked="shopInfo.checked" @click.native="checkBtn"></check-box>
         </div>
-        <div class="item-image">
+        <div class="item-image" @click="goDetail">
             <img :src="shopInfo.image" alt="">
         </div>
-        <div class="desc">
+        <div class="desc" @click="goDetail">
             <p>{{shopInfo.title}}</p>
             <p>{{shopInfo.desc}}</p>
             <div class="money-wrap">
@@ -64,6 +64,9 @@ export default {
     methods: {
         checkBtn() {
             this.$store.dispatch('checkButton', this.index)
+        },
+        goDetail() {
+            this.$router.push('/detail/' + this.shopInfo.iid)
         }
     },
     created() {},
@@ -91,6 +94,7 @@ export default {
         border-radius: 10px;
         overflow: hidden;
         /* margin: 0 12px; */
+        background: #eee;
     }
     .item-image img {
         width: 100%;

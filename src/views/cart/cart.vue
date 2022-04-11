@@ -9,7 +9,7 @@
             <cart-list-item v-for="(item, index) in cartList" :key="item.iid" :index="index" :shopInfo="item"></cart-list-item>
         </Scroll>
         <no-data v-else></no-data>
-        <bottom-nav :total="computeTotal"></bottom-nav>
+        <bottom-nav :total="computeTotal" :checkedNum="checkedNum" :cartLength="cartLength"></bottom-nav>
     </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
     name: 'cart',
     data() {
         return {
+            checkedNum: 0
         };
     },
     computed: {
@@ -40,10 +41,30 @@ export default {
         //     cartLength: 'cartLength',
         //     cartList: 'cartList'
         // })
-        ...mapGetters(['cartLength', 'cartList', 'computeTotal']),
+        ...mapGetters(['cartLength', 'cartList']),
+        computeTotal() {
+            let total = 0
+            let num = 0;
+            try {
+                for (const item of this.cartList) {
+                    if (item.checked) {
+                        total += parseFloat(item.lowNowPrice).toFixed(2) * item.count
+                        num++
+                    }
+                }
+                // state.cartList
+                //     .filter(item => item.checked)
+                //     .reduce((pre, item) => pre + parseFloat(item.lowNowPrice) * item.count)
+            } catch (error) {
+                console.log(error);
+            }
+            this.checkedNum = num
+            return total
+        },
     },
     watch: {},
-    methods: {},
+    methods: {
+    },
     created() {
     },
     mounted() {},
@@ -54,11 +75,8 @@ export default {
     },
     beforeDestroy() {},
     destroyed() {
-        console.log('destroyed');
     },
     activated() {
-        console.log(this.$store, this.$store.state.cartList);
-        console.log('activated');
     },
 }
 </script>

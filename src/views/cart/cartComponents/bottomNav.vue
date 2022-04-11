@@ -10,7 +10,9 @@
                 <span class="sign">￥</span>
                 <span class="total">{{total}}</span>
             </div>
-            <div class="buy deep-linear-color">结算</div> 
+            <div class="buy deep-linear-color" @click="goBuy">结算
+                <span v-if="checkedNum">({{checkedNum}})</span>
+            </div> 
         </div>
         
     </div>
@@ -27,6 +29,10 @@ export default {
         total: {
             type: Number,
             default: 0
+        },
+        checkedNum: {
+            type: Number,
+            default: 0
         }
     },
     data() {
@@ -37,13 +43,18 @@ export default {
     computed: {
         ...mapGetters({
             isCheckedAll: 'isCheckedAll',
-            cartLength: 'cartLength'
+            cartLength: 'cartLength',
         })
     },
     watch: {},
     methods: {
         checkAll() {
             this.$store.dispatch('checkAll')
+        },
+        goBuy() {
+            if (!this.checkedNum) {
+                this.$msg('请至少选择一个商品')
+            }
         }
     },
     created() {},
