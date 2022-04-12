@@ -1,6 +1,6 @@
 
 <template>
-    <div class="no-data">
+    <div class="no-data" :style="{height: height}">
         <div>
             <img src="~assets/images/common/noShop.png" alt="" srcset="">
             <span>{{content}}</span>
@@ -17,6 +17,10 @@ export default {
         content: {
             type: String,
             default: "暂无内容"
+        },
+        height: {
+            type: String,
+            default: "100%"
         }
     },
     data() {

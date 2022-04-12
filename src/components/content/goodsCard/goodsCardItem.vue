@@ -4,7 +4,7 @@
         <a @click="foodsDetail">
             <div class="card-img">
                 <!-- <img :src="cardData.show.img" alt=""> -->
-                <img v-lazy="cardData.show.img" alt="">
+                <img v-lazy="getImg" alt="">
             </div>
             <div class="card-text">
                 <p>{{cardData.title}}</p>
@@ -38,7 +38,11 @@ export default {
 
         };
     },
-    computed: {},
+    computed: {
+        getImg() {
+            return this.cardData.show?.img ? this.cardData.show.img : this.cardData.img
+        }
+    },
     watch: {},
     methods: {
         imgUpdate() {

@@ -85,6 +85,6 @@ export default {
         font-weight: normal;
     }
     .no-data {
-        height: calc(100vh - 144px);
+        height: calc(100vh - 144px)!important;
     }
 </style>
