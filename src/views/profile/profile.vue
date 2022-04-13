@@ -1,11 +1,24 @@
 <template>
-    <div class="profile">个人</div>
+    <div class="profile">
+        <navbar :isShowShadow="false">
+            <div slot="center">个人中心</div>
+        </navbar>
+        <user-info></user-info>
+        <list-view></list-view>
+    </div>
 </template>
 
 <script>
+import navbar from 'components/common/navbar/navbar'
+import userInfo from "./components/userInfo"
+import listView from "./components/listView"
 
 export default {
-    components: {},
+    components: {
+        navbar,
+        userInfo,
+        listView
+    },
     name: 'profile',
     data() {
         return {

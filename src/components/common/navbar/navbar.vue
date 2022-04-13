@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-bar" :style="{backgroundColor: backgroundColor}">
+    <div class="nav-bar" :style="navBarStyle">
         <div class="left"><slot name="left"></slot></div>
         <div class="center"><slot name="center"></slot></div>
         <div class="right"><slot name="right"></slot></div>
@@ -15,6 +15,10 @@ export default {
         path: String,
         backgroundColor: {
             type: String
+        },
+        isShowShadow: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -22,7 +26,14 @@ export default {
 
         };
     },
-    computed: {},
+    computed: {
+        navBarStyle() {
+            return {
+                backgroundColor: this.backgroundColor, 
+                boxShadow: this.isShowShadow ? '0 1px 1px rgba(0, 0, 0, .1)' : 'none'
+            }
+        }
+    },
     watch: {},
     methods: {},
     created() {},
@@ -43,7 +54,6 @@ export default {
         height: 44px;
         background-color: var(--color-theme);
         box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-        /* position: fixed; */
         position: relative;
         z-index: 1;
         left: 0;

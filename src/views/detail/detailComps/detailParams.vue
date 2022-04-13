@@ -9,7 +9,7 @@
                 </li>
             </ul>
         </div>
-        <div class="info-rule detail-info">
+        <div class="info-rule detail-info" v-show="info.length">
             <div class="info-title">{{info.key}}</div>
             <ul>
                 <li v-for="set in info.set">
@@ -51,8 +51,8 @@ export default {
     watch: {
         itemParams() {
             this.info = this.itemParams.info
-            this.rule = this.itemParams.rule,
-            this.table = this.rule.tables[0],
+            this.rule = this.itemParams.rule ?? [],
+            this.table = this.rule && this.rule.tables ? this.rule.tables[0] : [],
             this.images = this.info?.images ?? []
         }
     },
