@@ -1,8 +1,13 @@
-import {ADD_COUNTER, PUSH_CART, CHECK_BUTTON, CHECK_ALL} from './mutations-types'
+import {ADD_COUNTER, PUSH_CART, CHECK_BUTTON, CHECK_ALL,
+    REDUCE_COUNTER
+} from './mutations-types'
 
 export default {
     [ADD_COUNTER](state, payload) {
         payload.count++
+    },
+    [REDUCE_COUNTER](state, payload) {
+        payload.count > 1 ? payload.count-- : payload.count = 1
     },
     [PUSH_CART](state, payload) {
         state.cartList.push(payload)

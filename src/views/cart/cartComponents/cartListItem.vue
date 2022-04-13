@@ -6,15 +6,20 @@
         <div class="item-image" @click="goDetail">
             <img :src="shopInfo.image" alt="">
         </div>
-        <div class="desc" @click="goDetail">
-            <p>{{shopInfo.title}}</p>
-            <p>{{shopInfo.desc}}</p>
+        <div class="desc">
+            <p @click="goDetail">{{shopInfo.title}}</p>
+            <p @click="goDetail">{{shopInfo.desc}}</p>
             <div class="money-wrap">
                 <div class="money">
                     <span>￥</span>
                     <span class="many-money">{{getMoney}}</span>
                 </div>
-                <div class="count">x{{count}}</div>
+                <!-- <div class="count">x{{count}}</div> -->
+                <div class="operate">
+                    <div :class="{only: count === 1}" @click="decrease">-</div>
+                    <div>{{count}}</div>
+                    <div @click="increase">+</div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,6 +72,13 @@ export default {
         },
         goDetail() {
             this.$router.push('/detail/' + this.shopInfo.iid)
+        },
+        decrease() {
+            if (this.count === 1) return
+            this.$store.dispatch('reduceCart', this.shopInfo)
+        },
+        increase() {
+            this.$store.dispatch('addCart', this.shopInfo)
         }
     },
     created() {},
@@ -137,5 +149,27 @@ export default {
     .check-wrap {
         display: flex;
         align-items: center;
+    }
+    .operate {
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid #777;
+        font-size: 12px;
+        align-items: center;
+    }
+    .operate div:nth-child(1),
+    .operate div:nth-child(3) {
+        width: 20px;
+        text-align: center;
+        font-size: 16px;
+        padding-bottom: 3px;
+    }
+    .operate div:nth-child(2) {
+        padding: 4px 10px;
+        border-left: 1px solid #777;
+        border-right: 1px solid #777;
+    }
+    .only {
+        color: #ccc;
     }
 </style>

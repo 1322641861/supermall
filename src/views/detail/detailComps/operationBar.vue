@@ -50,7 +50,6 @@ export default {
             this.$emit('addToCart')
         },
         buy() {
-            console.log(333);
         }
     },
     created() {},
