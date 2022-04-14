@@ -48,7 +48,7 @@ export default {
             try {
                 for (const item of this.cartList) {
                     if (item.checked) {
-                        total += parseFloat(item.lowNowPrice).toFixed(2) * item.count
+                        total += item.lowNowPrice * 100 * item.count
                         num++
                     }
                 }
@@ -59,7 +59,7 @@ export default {
                 console.log(error);
             }
             this.checkedNum = num
-            return total
+            return total / 100
         },
     },
     watch: {},

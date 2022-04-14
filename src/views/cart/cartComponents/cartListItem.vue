@@ -56,7 +56,8 @@ export default {
             this.count = this.shopInfo.count;
             if (this.currentMoney) {
                 try {
-                    return parseFloat(this.currentMoney) * this.count;
+                    // 修复float精度问题
+                    return this.currentMoney * 100 * this.count / 100;
                 } catch (error) {
                     console.log(error);
                 }

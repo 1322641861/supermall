@@ -8,7 +8,8 @@ import getters from './getters'
 Vue.use(vuex)
 
 const state = {
-    cartList: []
+    cartList: [],
+    loadCount: 0
 }
 
 // 创建store实例

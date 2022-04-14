@@ -1,7 +1,7 @@
 <template>
     <div class="list-view">
         <ul class="list-wrap">
-            <li v-for="item in userList">
+            <li v-for="item in userList" @click="goDetail(item.href)">
                 <img class="left-icon" :src="item.icon" alt="">
                 <div class="right-title">
                     <span>{{item.name}}</span>
@@ -10,7 +10,7 @@
             </li>
         </ul>
         <ul class="list-wrap">
-            <li v-for="item in appList">
+            <li v-for="item in appList" @click="goDetail(item.href)">
                 <img class="left-icon" :src="item.icon" alt="">
                 <div class="right-title">
                     <span>{{item.name}}</span>
@@ -46,7 +46,7 @@ export default {
            appList: [
                {
                    name: '我的购物车',
-                   href: '',
+                   href: '/cart',
                    icon: require('assets/images/user/cart.png')
                },{
                    name: '下载购物APP',
@@ -58,7 +58,13 @@ export default {
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+        goDetail(url) {
+            if (url) {
+                this.$router.push(url)
+            }
+        }
+    },
     created() {},
     mounted() {},
     beforeCreate() {},

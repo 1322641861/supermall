@@ -11,4 +11,7 @@ export default {
         isCheckedAll = (!state.cartList.length || cart.length) ? false : true;
         return isCheckedAll
     },
+    getLoadStatus(state) {
+        return state.loadCount > 0
+    }
 }

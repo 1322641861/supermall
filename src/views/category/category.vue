@@ -8,6 +8,7 @@
             <right-detail :subCategory="subCategory" :goods="goods"></right-detail>
         </div>
         <no-data v-else height="calc(100vh - 94px)"></no-data>
+        <load-component :show="getLoadStatus"></load-component>
     </div>
 </template>
 
@@ -17,6 +18,8 @@ import navbar from "components/common/navbar/navbar"
 import noData from "components/content/noData/noData"
 import leftTab from "./components/leftTab"
 import rightDetail from "./components/rightDetail"
+import loadComponent from "@/modules/loading/loading"
+import {mapGetters} from 'vuex'
 
 export default {
     components: {
@@ -24,6 +27,7 @@ export default {
         noData,
         leftTab,
         rightDetail,
+        loadComponent
     },
     name: 'category',
     data() {
@@ -39,7 +43,9 @@ export default {
             }
         };
     },
-    computed: {},
+    computed: {
+        ...mapGetters(['getLoadStatus'])
+    },
     watch: {},
     methods: {
         /*
@@ -106,11 +112,13 @@ export default {
     created() {
         this._getCategory()
     },
-    mounted() {},
+    mounted() {
+    },
     beforeCreate() {},
     beforeMount() {},
     beforeUpdate() {},
-    updated() {},
+    updated() {
+    },
     beforeDestroy() {},
     destroyed() {},
     activated() {},

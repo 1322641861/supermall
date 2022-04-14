@@ -42,7 +42,7 @@
             goodsCard,
             swiper,
             Recommend,
-            Features,
+            Features
         },
         name: 'home',
         data() {
@@ -58,7 +58,7 @@
                 isShowBtn: false, // 回到顶部
                 tabFixed: false,
                 tabOffset: 0,
-                saveY: 0,
+                saveY: 0
             };
         },
         computed: {

@@ -25,4 +25,8 @@ export const itemListenerMixin = {
             this.isShowBtn = sizeY < -800 ? true : false;      
         },
     },
+    destory() {
+        // 关闭全局监听
+        this.$bus.$off('imgUpdated', this.itemImgLoad)
+    }
 }

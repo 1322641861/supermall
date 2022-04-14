@@ -1,14 +1,18 @@
 import axios from "axios";
+import index from '@/store/index'
+import Base from 'common/base'
 
 export default function request(config) {
     const instance = axios.create({
-        // baseURL: 'http://biboniu.top'
-        baseURL: 'http://152.136.185.210:7878/api/hy66'
+        baseURL: Base.baseUrl[0]
     })
     
     // 请求拦截
     instance.interceptors.request.use(value => {
-        // console.log(value)
+        // console.log('请求拦截', value)
+        if (Base.reqWhiteList.indexOf(value.url) === -1) {
+            index.dispatch('incLoadCount')
+        }
         return value
     }, err => {
         console.log(err)
@@ -16,7 +20,10 @@ export default function request(config) {
 
     // 响应拦截
     instance.interceptors.response.use(res => {
-        // console.log(res)
+        // console.log('响应拦截', res)
+        if (Base.reqWhiteList.indexOf(res.config.url) === -1) {
+            index.dispatch('decLoadCount')
+        }
         return res.data
     }, err => {
         console.log(err)

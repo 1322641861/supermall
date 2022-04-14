@@ -3,10 +3,13 @@ import App from './App.vue'
 import router from '@/router/index'
 import store from "@/store/index"
 import alert from '@/modules/alert'
+// import load from "@/modules/loading"
 import lazyLoad from 'vue-lazyload'
 
 Vue.config.productionTip = false // 阻止启动生产消息，常用作指令
+
 Vue.use(alert) // 挂载自定义组件
+// Vue.use(load)
 // 图片懒加载
 Vue.use(lazyLoad, {
   loading: require('./assets/images/common/loading.png')

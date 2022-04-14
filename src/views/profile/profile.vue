@@ -25,11 +25,13 @@ export default {
 
         };
     },
-    computed: {},
+    computed: {
+    },
     watch: {},
     methods: {},
     created() {},
-    mounted() {},
+    mounted() {
+    },
     beforeCreate() {},
     beforeMount() {},
     beforeUpdate() {},

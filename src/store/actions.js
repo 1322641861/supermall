@@ -1,5 +1,6 @@
-import {ADD_COUNTER, PUSH_CART, CHECK_BUTTON, CHECK_ALL,
-    REDUCE_COUNTER
+import {
+    ADD_COUNTER, PUSH_CART, CHECK_BUTTON, CHECK_ALL,
+    REDUCE_COUNTER, INC_LOAD_COUNT, DEC_LOAD_COUNT
 } from './mutations-types'
 
 export default {
@@ -10,7 +11,6 @@ export default {
             if (oldPayload) {
                 context.commit(ADD_COUNTER, oldPayload)
             } else {
-                payload.count = 1
                 context.commit(PUSH_CART, payload)
             }
             res()
@@ -29,4 +29,10 @@ export default {
     checkAll(context) {
         context.commit(CHECK_ALL, context.getters.isCheckedAll);
     },
+    incLoadCount(context) {
+        context.commit(INC_LOAD_COUNT)
+    },
+    decLoadCount(context) {
+        context.commit(DEC_LOAD_COUNT)
+    }
 }

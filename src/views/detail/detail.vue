@@ -166,10 +166,6 @@
         beforeUpdate() { },
         updated() { },
         beforeDestroy() { },
-        destroyed() {
-            // 关闭全局监听
-            this.$bus.$off('imgUpdated', this.itemImgLoad)
-        },
         activated() { },
     }
 </script>
