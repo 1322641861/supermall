@@ -15,6 +15,7 @@
         </Scroll>
         <operation-bar @addToCart="addToCart"></operation-bar>
         <scroll-top :isShow="isShowBtn" @click.native="toTop"></scroll-top>
+        <load-component :show="getLoadStatus"></load-component>
     </div>
 </template>
 
@@ -30,9 +31,12 @@
     import operationBar from "./detailComps/operationBar"
 
     import Scroll from "components/common/scroll/Scroll"
+    import loadComponent from "@/modules/loading/loading"
+
     import { getDetail, Goods, ShopInfo, getRecommend, Recommend } from "@/networks/detail"
     import {itemListenerMixin} from "common/mixin"
     import {debounce} from "common/utils"
+    import {mapGetters} from "vuex"
 
     export default {
         components: {
@@ -46,6 +50,7 @@
             detailRecommend,
             operationBar,
             Scroll,
+            loadComponent
         },
         name: 'detail',
         mixins: [itemListenerMixin],
@@ -66,7 +71,9 @@
                 loading: false
             };
         },
-        computed: {},
+        computed: {
+            ...mapGetters(['getLoadStatus'])
+        },
         watch: {},
         methods: {
             getDetail() {

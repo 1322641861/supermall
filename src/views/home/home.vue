@@ -17,6 +17,7 @@
             <goods-card :goodsList="showGoods"></goods-card>
         </Scroll>
         <scroll-top :isShow="isShowBtn" @click.native="toTop"></scroll-top>
+        <load-component :show="getLoadStatus"></load-component>
     </div>
 </template>
 
@@ -30,9 +31,11 @@
     import swiper from './homeComponents/homeSwiper'
     import Recommend from './homeComponents/homeRecommend'
     import Features from './homeComponents/featuresView'
+    import loadComponent from '@/modules/loading/loading'
 
     import { getHomeMultidata, getHomeGoods } from '@/networks/home'
     import {itemListenerMixin} from 'common/mixin'
+    import {mapGetters} from 'vuex'
 
     export default {
         components: {
@@ -42,7 +45,8 @@
             goodsCard,
             swiper,
             Recommend,
-            Features
+            Features,
+            loadComponent
         },
         name: 'home',
         data() {
@@ -65,6 +69,7 @@
             showGoods() {
                 return this.goods[this.currentType].list
             },
+            ...mapGetters(['getLoadStatus'])
         },
         mixins: [itemListenerMixin], // $bus 全局监听混和(抽取公共函数和变量)
         watch: {},
