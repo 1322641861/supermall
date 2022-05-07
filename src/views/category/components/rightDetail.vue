@@ -40,6 +40,7 @@ export default {
     mixins: [itemListenerMixin],
     data() {
         return {
+            saveY: 0
         };
     },
     computed: {},
@@ -64,7 +65,14 @@ export default {
     updated() {},
     beforeDestroy() {},
     destroyed() {},
-    activated() {},
+    activated() {
+        /// 回到页面时保持位置不变
+        this.$refs.scroll.scrollTo(0, this.saveY, 0)
+        this.$refs.scroll.refresh()
+    },
+    deactivated() {
+        this.saveY = this.$refs.scroll.getScrollY()
+    }
 }
 </script>
 <style scoped>
