@@ -163,7 +163,7 @@ export default {
         width: 20px;
         text-align: center;
         font-size: 16px;
-        padding-bottom: 3px;
+        /* padding-bottom: 3px; */
     }
     .operate div:nth-child(2) {
         padding: 4px 10px;

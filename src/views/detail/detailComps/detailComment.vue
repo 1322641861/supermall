@@ -100,6 +100,9 @@ export default {
         font-size: 12px;
         color: var(--color-theme);
         float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .comment-title a img {
         width: 16px;
